@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import { useMainContext } from "../../contexts/MainContext";
 import MainLoading from "../MainLoading/MainLoading";
-import logo from "../../assets/LP.jpg";
+import logo from "../../assets/logo.jpg";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
