@@ -20,7 +20,7 @@ const Cart = () => {
   }, [products]);
 
   return (
-    <div className="flex-1  h-full flex flex-col gap-[20px] bg-white z-[3] p-8">
+    <div className="w-full h-full flex flex-col gap-[20px] bg-white z-[3] p-8 md:pb-4 pb-[100px] overflow-y-scroll hideScroll">
       <div className="w-full flex flex-row gap-3 text-[14px]">
         <Link className="hover:text-red-600" to={`/`}>{`Home`}</Link>
         <p className="text-gray-500">{`/`}</p>
@@ -33,13 +33,6 @@ const Cart = () => {
               ? `Your cart is currently empty.`
               : `${products?.length} products in your cart`}
           </p>
-        </div>
-        <div>
-          <RxCross2
-            className="hover:cursor-pointer hover:text-red-600"
-            size={24}
-            onClick={() => setIsCart(false)}
-          />
         </div>
       </div>
       {products?.length === 0 ? (
@@ -81,7 +74,7 @@ const Cart = () => {
             />
           </div>
           <div className="flex flex-row w-full justify-between items-center">
-            <div className="flex flex-col gap-[20px] w-full">
+            <div className="flex flex-col md:gap-[20px] gap-1 w-full">
               <div className="flex flex-row w-full">
                 <p className="w-full text-[18px] font-[700]">{`Total: $${totalPrice}`}</p>
               </div>
@@ -91,7 +84,7 @@ const Cart = () => {
             </div>
             <div className="flex flex-row w-full gap-4 justify-end">
               <button
-                className="flex flex-row items-center justify-center p-4 px-[80px] text-white bg-black hover:bg-red-600"
+                className="flex flex-row items-center justify-center p-4 md:px-[80px] px-[20px] text-white bg-black hover:bg-red-600"
                 style={{ transition: "all 0.2s ease-in-out" }}
               >
                 Check out

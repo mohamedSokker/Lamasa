@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../CartCard/Style/style.css";
+
 const ContactUs = () => {
   return (
-    <div className="flex-1 flex flex-col p-2 gap-10 py-10 px-8">
+    <div className="w-full h-full flex flex-col pt-2 md:pb-2 pb-[100px] gap-10 py-10 px-8 overflow-y-scroll hideScroll">
       <div className="flex flex-row gap-3 text-[14px]">
         <Link className="hover:text-red-600" to={`/`}>{`Home`}</Link>
         <p className="text-gray-500">{`/`}</p>
@@ -16,7 +18,7 @@ const ContactUs = () => {
         <div className="flex flex-row justify-start w-full">
           <p className="font-[500] text-[26px]">Drop us a line</p>
         </div>
-        <div className="flex flex-row w-full gap-4">
+        <div className="flex md:flex-row flex-col w-full gap-4">
           <input
             type="text"
             placeholder="Name"

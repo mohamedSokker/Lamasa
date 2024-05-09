@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="w-screen h-screen flex flex-col p-2 gap-10 px-8">
+    <div className="w-screen h-screen flex flex-col pt-2 md:pb-2 pb-[100px] gap-10 px-8 overflow-y-scroll hideScroll">
       <div className="flex flex-row gap-3 text-[14px]">
         <Link className="hover:text-red-600" to={`/`}>{`Home`}</Link>
         <p className="text-gray-500">{`/`}</p>
@@ -13,7 +13,7 @@ const Register = () => {
         <p>Create an account</p>
       </div>
       <div className="w-full flex flex-col gap-4">
-        <div className="flex flex-row w-full gap-4">
+        <div className="flex md:flex-row flex-col w-full gap-4">
           <input
             type="text"
             placeholder="First Name"

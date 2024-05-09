@@ -11,7 +11,7 @@ import { useMainContext } from "../../../contexts/MainContext";
 const Product = ({ data }) => {
   const { id } = useParams();
 
-  const { products, setProducts } = useMainContext();
+  const { products, setProducts, screenSize } = useMainContext();
 
   const [targetData, setTargetData] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,14 +60,70 @@ const Product = ({ data }) => {
     }
   };
   return (
-    <div className="flex flex-1 flex-row justify-between h-full p-2 gap-4 px-8 overflow-y-scroll relative z-[1]">
-      <div className="flex flex-col gap-8 items-start justify-start w-[500px] py-10 px-10">
+    <div className="flex w-full md:flex-row flex-col justify-between h-full md:pt-2 md:pb-2 pb-10 gap-4 md:px-8 px-0 overflow-y-scroll relative z-[1]">
+      <div className="flex flex-col gap-8 items-start justify-start md:w-[500px] w-full py-10 px-10">
         <div className="flex flex-row gap-3 text-[14px] justify-start">
           <Link className="hover:text-red-600" to={`/`}>{`Home`}</Link>
           <p className="text-gray-500">{`/`}</p>
           <p className="text-gray-500">{`${targetData?.desc}`}</p>
         </div>
         <div className="text-[14px]">Lamasa</div>
+        {screenSize <= 1200 && (
+          <div className="flex flex-col w-full items-end relative z-[1] p-4 gap-4">
+            <div className="w-full h-[480px] overflow-hidden flex flex-row">
+              {data?.map((item, index) => (
+                <img
+                  key={index}
+                  src={item.img[index]}
+                  className="w-full h-full flex-grow-0 flex-shrink-0 block"
+                  style={{
+                    translate: `${-100 * currentIndex}%`,
+                    transition: "all 0.3s ease-in-out",
+                  }}
+                />
+              ))}
+            </div>
+
+            <div
+              className="absolute -right-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
+              onClick={handleRightArrow}
+            >
+              <FaArrowRight
+                size={14}
+                style={{
+                  color: isRightArrowActive ? "black" : "rgb(156,163,175)",
+                }}
+              />
+            </div>
+            <div
+              className="absolute -left-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
+              onClick={handleLeftArrow}
+            >
+              <FaArrowLeft
+                size={14}
+                style={{
+                  color: isLeftArrowActive ? "black" : "rgb(156,163,175)",
+                }}
+              />
+            </div>
+            <div className="w-full flex flex-row justify-center absolute bottom-[70px]">
+              <div className="rounded-full flex flex-row bg-gray-300 px-3 p-2 gap-2">
+                {data.map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-2 h-2 rounded-full bg-white hover:cursor-pointer hover:scale-[1.2]"
+                    style={{
+                      transition: "scale 0.1 ease-in-out",
+                      backgroundColor:
+                        currentIndex === index ? "white" : "black",
+                    }}
+                    onClick={() => setCurrentIndex(index)}
+                  ></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex justify-center items-center text-[22px] font-[700]">
           <p>{targetData?.desc}</p>
         </div>
@@ -155,62 +211,68 @@ const Product = ({ data }) => {
             </button>
           </div>
 
-          <div className="w-full flex flex-row gap-4 items-center p-4">
+          <div className="w-full flex flex-row gap-4 items-center py-4">
             <button className="flex flex-1 justify-center items-center p-4 border-[2px] border-black hover:text-red-600 hover:border-red-600">
               Buy it now
             </button>
           </div>
         </div>
       </div>
-      <div className="flex flex-col flex-1 items-end relative z-[1] p-4 gap-4">
-        <div className="w-full h-[480px] overflow-hidden flex flex-row">
-          {data?.map((item, index) => (
-            <img
-              key={index}
-              src={item.img[index]}
-              className="w-full h-full flex-grow-0 flex-shrink-0 block"
-              style={{
-                translate: `${-100 * currentIndex}%`,
-                transition: "all 0.3s ease-in-out",
-              }}
-            />
-          ))}
-        </div>
-
-        <div
-          className="absolute -right-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
-          onClick={handleRightArrow}
-        >
-          <FaArrowRight
-            size={14}
-            style={{ color: isRightArrowActive ? "black" : "rgb(156,163,175)" }}
-          />
-        </div>
-        <div
-          className="absolute -left-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
-          onClick={handleLeftArrow}
-        >
-          <FaArrowLeft
-            size={14}
-            style={{ color: isLeftArrowActive ? "black" : "rgb(156,163,175)" }}
-          />
-        </div>
-        <div className="w-full flex flex-row justify-center absolute bottom-[70px]">
-          <div className="rounded-full flex flex-row bg-gray-300 px-3 p-2 gap-2">
-            {data.map((item, index) => (
-              <div
+      {screenSize > 1200 && (
+        <div className="flex flex-col flex-1 items-end relative z-[1] p-4 gap-4">
+          <div className="w-full h-[480px] overflow-hidden flex flex-row">
+            {data?.map((item, index) => (
+              <img
                 key={index}
-                className="w-2 h-2 rounded-full bg-white hover:cursor-pointer hover:scale-[1.2]"
+                src={item.img[index]}
+                className="w-full h-full flex-grow-0 flex-shrink-0 block"
                 style={{
-                  transition: "scale 0.1 ease-in-out",
-                  backgroundColor: currentIndex === index ? "white" : "black",
+                  translate: `${-100 * currentIndex}%`,
+                  transition: "all 0.3s ease-in-out",
                 }}
-                onClick={() => setCurrentIndex(index)}
-              ></div>
+              />
             ))}
           </div>
+
+          <div
+            className="absolute -right-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
+            onClick={handleRightArrow}
+          >
+            <FaArrowRight
+              size={14}
+              style={{
+                color: isRightArrowActive ? "black" : "rgb(156,163,175)",
+              }}
+            />
+          </div>
+          <div
+            className="absolute -left-[30px] top-[240px] z-[2] hover:cursor-pointer bg-gray-50 p-4"
+            onClick={handleLeftArrow}
+          >
+            <FaArrowLeft
+              size={14}
+              style={{
+                color: isLeftArrowActive ? "black" : "rgb(156,163,175)",
+              }}
+            />
+          </div>
+          <div className="w-full flex flex-row justify-center absolute bottom-[70px]">
+            <div className="rounded-full flex flex-row bg-gray-300 px-3 p-2 gap-2">
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className="w-2 h-2 rounded-full bg-white hover:cursor-pointer hover:scale-[1.2]"
+                  style={{
+                    transition: "scale 0.1 ease-in-out",
+                    backgroundColor: currentIndex === index ? "white" : "black",
+                  }}
+                  onClick={() => setCurrentIndex(index)}
+                ></div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

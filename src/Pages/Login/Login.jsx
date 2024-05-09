@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../CartCard/Style/style.css";
+
 const Login = () => {
   return (
-    <div className="w-screen h-screen flex flex-col p-2 gap-10 px-8">
+    <div className="w-screen h-screen flex flex-col  pt-2 md:pb-2 pb-[100px] gap-10 px-8 overflow-y-scroll hideScroll">
       <div className="flex flex-row gap-3 text-[14px]">
         <Link to={`/`}>{`Home`}</Link>
         <p className="text-gray-500">{`/`}</p>
@@ -26,7 +28,7 @@ const Login = () => {
       </div>
       <div className="w-full flex flex-row justify-between">
         <div>
-          <button className="bg-black p-4 px-[80px] text-white font-[600]">
+          <button className="bg-black p-4 md:px-[80px] px-[30px] text-white font-[600]">
             Login
           </button>
         </div>
