@@ -1,0 +1,17 @@
+@keyframes animate-in {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(100%);
+  }
+}
+
+@keyframes animate-out {
+  from {
+    transform: translate(100%);
+  }
+  to {
+    transform: translate(0);
+  }
+}
