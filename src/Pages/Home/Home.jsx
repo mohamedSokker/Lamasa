@@ -14,21 +14,23 @@ const Home = ({ data }) => {
             Featured collection
           </p>
         </div>
-        <div className="flex md:flex-row md:flex-wrap flex-col justify-start items-start w-full gap-8 md:pb-4 pb-[100px]">
-          {data.map((item, index) => (
-            <Link
-              to={`/product/${item.id}`}
-              key={index}
-              className="flex flex-col gap-4 items-start justify-center"
-            >
-              <img
-                className="md:w-[200px] w-screen md:h-[240px] h-[80%]"
-                src={item.img[0]}
-              />
-              <div className="font-bold max-w-[200px]">{item.desc}</div>
-              <p>{`$${item.price}`}</p>
-            </Link>
-          ))}
+        <div className="w-full flex justify-center items-center m-auto">
+          <div className="flex mx-auto md:flex-row md:flex-wrap flex-col justify-center items-start gap-8 md:pb-4 pb-[100px]">
+            {data.map((item, index) => (
+              <Link
+                to={`/product/${item.id}`}
+                key={index}
+                className="flex flex-col gap-4 items-start justify-center"
+              >
+                <img
+                  className="md:w-[200px] flex-grow-[1] w-screen md:h-[240px] h-[80%]"
+                  src={item.img[0]}
+                />
+                <div className="font-bold max-w-[200px]">{item.desc}</div>
+                <p>{`$${item.price}`}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

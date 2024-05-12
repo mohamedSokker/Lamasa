@@ -20,6 +20,8 @@ import Recover from "./Pages/Recover/Recover";
 import Account from "./Pages/Account/View/Account";
 import AddProduct from "./Pages/AddProduct/View/AddProduct";
 import Product from "./Pages/Product/View/Product";
+import Checkout from "./Pages/Checkout/View/Checkout";
+import PreCheckOut from "./Pages/PreCheckOut/View/PreCheckOut";
 
 const data = [
   {
@@ -68,6 +70,8 @@ function App() {
       <Route path="/register" element={<Register />} />
 
       <Route element={<PersistLogin />}>
+        <Route path="/payment" element={<Checkout />} />
+        <Route path="/checkout" element={<PreCheckOut />} />
         <Route element={<RequiredAuth allowedRole={"*"} />}>
           <Route path="/" element={<Home data={data} />} />
         </Route>

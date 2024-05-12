@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxLockClosed, RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
@@ -7,14 +7,20 @@ import "../../Pages/CartCard/Style/style.css";
 import LP from "../../assets/logo.jpg";
 import { useMainContext } from "../../contexts/MainContext";
 import CartCard from "../../Pages/CartCard/View/CartCard";
+import { getItemStore } from "../../Services/LocalStorage/getItemStorage";
 
 const Sidebar = ({ handleCloseSidebarMobile }) => {
-  const { usersData, products, screenSize } = useMainContext();
+  const { usersData, products, setProducts, screenSize } = useMainContext();
 
   const [isCart, setIsCart] = useState(false);
+
+  useEffect(() => {
+    const p = getItemStore();
+    setProducts(p ? p : []);
+  }, []);
   return (
     <>
-      <div className="w-[300px] bg-white h-full relative flex flex-col items-center justify-start overflow-y-scroll hideScroll md:border-l-[0px] border-l-[1px] pr-8 border-r-[1px] border-gray-200 z-[4]">
+      <div className="w-[300px] bg-white h-full relative flex flex-col items-center justify-start overflow-y-scroll hideScroll md:border-l-[0px] border-l-[1px] pr-8 border-r-[1px] border-gray-200 z-[6]">
         {screenSize > 1200 && (
           <div className="flex flex-row w-full justify-end p-2 py-6">
             <div
@@ -69,7 +75,7 @@ const Sidebar = ({ handleCloseSidebarMobile }) => {
               Login
             </Link>
           )}
-          {usersData?.Role === "Admin" && (
+          {usersData?.roles === "Admin" && (
             <Link
               className="hover:text-red-700 hover:underline"
               to={`/addProduct`}
